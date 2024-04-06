@@ -1,4 +1,4 @@
-package org._404notfound.orderservice.dto;
+package org._404notfound.productservice.dto;
 
 import lombok.Data;
 

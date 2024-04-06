@@ -1,5 +1,6 @@
 package org._404notfound.adminservice.service;
 
+import org._404notfound.adminservice.dto.ProductDTO;
 import org._404notfound.adminservice.model.Order;
 import org._404notfound.adminservice.model.Product;
 
@@ -10,11 +11,11 @@ public interface AdminService {
 
     Product getProductById(Long id);
 
-    Product createProduct(Product product);
+    Product createProduct(ProductDTO productDTO);
 
     void deleteProduct(Long id);
 
-    Product updateProduct(Long id, Product updatedProduct);
+    Product updateProduct(Long id, ProductDTO updatedProductDTO);
 
     List<Order> viewAllOrders();
 }

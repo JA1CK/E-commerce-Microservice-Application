@@ -1,8 +1,10 @@
 package org._404notfound.adminservice.controller;
 
+import org._404notfound.adminservice.dto.ProductDTO;
 import org._404notfound.adminservice.model.Order;
 import org._404notfound.adminservice.model.Product;
 import org._404notfound.adminservice.service.AdminService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,28 +20,33 @@ public class AdminController {
     }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts() {
-        return adminService.getAllProducts();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = adminService.getAllProducts();
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return adminService.getProductById(id);
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        Product product = adminService.getProductById(id);
+        return ResponseEntity.ok(product);
     }
 
     @PostMapping("/products")
-    public Product createProduct(@RequestBody Product product) {
-        return adminService.createProduct(product);
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
+        Product createdProduct = adminService.createProduct(productDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
     @DeleteMapping("/products/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         adminService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/products/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
-        return adminService.updateProduct(id, updatedProduct);
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody ProductDTO updatedProduct) {
+        Product product = adminService.updateProduct(id, updatedProduct);
+        return ResponseEntity.ok(product);
     }
 
     @GetMapping("/orders")
